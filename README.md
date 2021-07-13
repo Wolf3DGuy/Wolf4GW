@@ -28,7 +28,7 @@ Add support for all versions of Wolfenstein 3D and Spear of Destiny
 How to build
 ============
 
-Download this folder containing the Open Watcom C v1.8 compiler from here: http://www.mediafire.com/file/u8ndx01tthmafsl/Wolf4GW.7z/file
+Download this folder containing the Open Watcom C v1.8 compiler from here: https://cdn.discordapp.com/attachments/864622289877598229/864622370592522240/Wolf4GW.7z
 
 To compile the whole project, run BUILD.BAT.
 
