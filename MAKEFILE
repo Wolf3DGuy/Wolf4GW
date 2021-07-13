@@ -1,0 +1,88 @@
+#
+#  Makefile for Wolf4GW
+#
+PROCESSOR = 386
+
+#
+# name the compiler
+#
+CC = wcc$(PROCESSOR)
+ASM = tasm
+
+MODEL = f       # flat
+
+#
+# options to use
+#
+CFLAGS = -m$(MODEL) /i=include /wx /wcd=111 /wcd=400 /j /zp1 /zq /5r
+#AFLAGS = -5r -wx
+AFLAGS = /p /mx /zi
+
+.EXTENSIONS:
+.EXTENSIONS: .exe .lib .obj .asm .c
+
+gamepal.obj:     gamepal.c id_heads.h
+
+signon.obj:  	 signon.c id_heads.h
+
+id_ca.obj:   	 id_ca.c id_heads.h wl_def.h
+
+id_in.obj:   	 id_in.c id_heads.h wl_def.h
+
+id_pm.obj:   	 id_pm.c id_heads.h wl_def.h
+
+id_sd.obj:   	 id_sd.c id_heads.h wl_def.h
+
+id_us_1.obj: 	 id_us_1.c id_heads.h wl_def.h
+
+id_vh.obj:   	 id_vh.c id_heads.h wl_def.h
+
+id_vl.obj:   	 id_vl.c id_heads.h wl_def.h
+
+wl_act1.obj: 	 wl_act1.c wl_def.h
+
+wl_act2.obj:     wl_act2.c wl_def.h
+
+wl_agent.obj:    wl_agent.c wl_def.h
+
+wl_debug.obj: 	 wl_debug.c wl_def.h
+
+wl_draw.obj: 	 wl_draw.c wl_def.h
+
+wl_dr_a.obj:	 wl_dr_a.asm wl_def.h
+
+wl_game.obj: 	 wl_game.c wl_def.h
+
+wl_inter.obj: 	 wl_inter.c wl_def.h
+
+wl_main.obj: 	 wl_main.c wl_def.h
+
+wl_menu.obj: 	 wl_menu.c wl_def.h
+
+wl_play.obj: 	 wl_play.c wl_def.h
+
+wl_scale.obj: 	 wl_scale.c wl_def.h
+
+wl_state.obj: 	 wl_state.c wl_def.h
+
+wl_text.obj: 	 wl_text.c wl_def.h
+
+wl_span.obj: 	 wl_span.c wl_def.h
+
+id_us_a.obj: 	 id_us_a.asm id_heads.h wl_def.h
+
+wolf3d.exe: gamepal.obj signon.obj id_ca.obj id_in.obj id_pm.obj id_sd.obj id_us_1.obj id_vh.obj        	    id_vl.obj wl_act1.obj wl_act2.obj wl_agent.obj wl_debug.obj wl_draw.obj wl_game.obj	            	    wl_inter.obj wl_main.obj wl_menu.obj wl_play.obj wl_scale.obj wl_state.obj wl_text.obj 	            wl_span.obj wl_dr_a.obj id_us_a.obj
+            wlink name wolf3d sys dos4g op map op caseexact op q file *.obj
+
+all : wolf3d.exe .symbolic
+      @echo Success!
+      @%null
+
+#
+# implicit rules
+#
+.c.obj: .AUTODEPEND
+ $(CC) $^& $(CFLAGS)
+
+.asm.obj: .AUTODEPEND
+ $(ASM) $^& $(AFLAGS)
